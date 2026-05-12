@@ -99,6 +99,24 @@ const HomeScreen = () => {
         switchBg: "#F3F4F6",
       };
 
+      const composedCardStyle = StyleSheet.compose(
+        styles.noteCard,
+        {
+          backgroundColor: theme.card,
+        }
+      );
+
+      const flattenedTitleStyle =
+        StyleSheet.flatten([
+          styles.noteTitle,
+          {
+            color: theme.text,
+            fontSize: isTablet
+              ? 22
+              : 18,
+          },
+      ]);
+
     const filteredNotes = NOTES.filter((note) => {
     const query = searchQuery.toLowerCase();
 
@@ -115,23 +133,10 @@ const HomeScreen = () => {
           width: isTablet ? "48%" : "100%",
         }}
       >
-        <View
-          style={[
-            styles.noteCard,
-            {
-              backgroundColor: theme.card,
-            },
-          ]}
-        >
+        <View style={composedCardStyle}>
           <View style={styles.noteContent}>
             <Text
-              style={[
-                styles.noteTitle,
-                {
-                  color: theme.text,
-                  fontSize: isTablet ? 22 : 18,
-                },
-              ]}
+              style={flattenedTitleStyle}
             >
               {item.title}
             </Text>
@@ -373,15 +378,7 @@ const HomeScreen = () => {
             </View>
 
             <Pressable>
-              <View
-                style={[
-                  styles.noteCard,
-                  {
-                    backgroundColor:
-                      theme.card,
-                  },
-                ]}
-              >
+              <View style={composedCardStyle}>
                 <View
                   style={{
                     width: isTablet
